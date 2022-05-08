@@ -213,10 +213,7 @@ class _InputPageState extends State<InputPage> {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(const ResultPage(), arguments: [
-                height.toInt(),
-                weight.toInt(),
-              ]);
+              Get.to(const ResultPage());
             },
             child: Container(
               alignment: Alignment.center,
