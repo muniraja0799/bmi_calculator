@@ -1,11 +1,14 @@
+import 'package:bmi_calculator/calculator.dart';
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/result_page.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'widgets/icon_content.dart';
-import 'widgets/reusable_card.dart';
-import 'widgets/round_icon_button.dart';
+
+import '../widgets/bottom_button.dart';
+import '../widgets/icon_content.dart';
+import '../widgets/reusable_card.dart';
+import '../widgets/round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -211,21 +214,22 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
             onTap: () {
-              Get.to(const ResultPage());
+              Calculator calc = Calculator(
+                height: height,
+                weight: weight,
+              );
+              Get.to(
+                () => ResultPage(),
+                arguments: [
+                  calc.calculateBMI(),
+                  calc.getResult(),
+                  calc.getInterpretation(),
+                ],
+              );
             },
-            child: Container(
-              alignment: Alignment.center,
-              child: const Text(
-                'CALCULATE',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-              color: KBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: KBottomContainerHeight,
-            ),
+            buttonTitle: 'CALCULATE',
           ),
         ],
       ),
